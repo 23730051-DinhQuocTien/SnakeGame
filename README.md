@@ -17,6 +17,7 @@ Cài đặt và chạy
 Đảm bảo bạn đã cài đặt tất cả các thư viện cần thiết.
 
 Phát triển bởi
+
 Project management team:
 - DINH QUOC TIEN 23730051
 - NGUYEN NGOC LAN 23730026
