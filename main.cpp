@@ -18,7 +18,7 @@ public:
 
     Food()
     {
-        Image image = LoadImage (food.png);
+        Image image = LoadImage ("Graphics/food.png");
         texture =LoadTextureFromImage(image);
         UnloadImage(image);
         position = GenerateRandomPos();
