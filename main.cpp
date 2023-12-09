@@ -26,10 +26,10 @@ bool ElementInDeque(Vector2 element, deque<Vector2> deque)
     return false;
 }
 
-bool eventTriggered(double interval)
+bool eventTriggered(double interval, int level)
 {
     double currentTime = GetTime();
-    if(currentTime - lastUpdateTime >= interval)
+    if(currentTime - lastUpdateTime >= interval/level+0.07)
     {
         lastUpdateTime = currentTime;
         return true;
@@ -50,7 +50,7 @@ public:
         {
             float x = body[i].x;
             float y = body[i].y;
-            Rectangle segment = Rectangle{offset+x*cellSize, offset+y*cellSize, cellSize, cellSize};
+            Rectangle segment = Rectangle{offset+x*cellSize, offset+y*cellSize,static_cast<float>(cellSize ) ,static_cast<float>( cellSize) };
             DrawRectangleRounded(segment, 0.5, 6, darkGreen);
         }
     }
@@ -83,7 +83,7 @@ public:
 
     Food(deque<Vector2> snakeBody)
     {
-        Image image = LoadImage("Graphics/food.png");
+        Image image = LoadImage("Graphics/food2.png");
         texture = LoadTextureFromImage(image);
         UnloadImage(image);
         position = GenerateRandomPos(snakeBody);
@@ -148,7 +148,7 @@ public:
         eatSound = LoadSound("Sounds/eat.wav");
         wallSound = LoadSound("Sounds/wall.mp3");
         jumpSound = LoadSound("Sounds/jump.wav");
-        endgameSound = LoadSound("Sounds/endgame.mp3");
+        endgameSound = LoadSound("Sounds/endgame.wav");
         levelupSound = LoadSound("Sounds/levelup.wav");
 
         backgroundMusic = LoadMusicStream("Sounds/mario.mp3");
@@ -291,35 +291,35 @@ int main () {
     {
         BeginDrawing();
 
-        if(eventTriggered(1.3))
+        if(eventTriggered(0.3, game.level))
         {
             game.Update();
         }
 
         if(IsKeyPressed(KEY_UP) && game.snake.direction.y != 1)
         {
-            //PlaySound(game.jumpSound);
+            PlaySound(game.jumpSound);
             game.snake.direction = {0,-1};
             game.running = true;
         }
 
         if(IsKeyPressed(KEY_DOWN) && game.snake.direction.y != -1)
         {
-           //PlaySound(game.jumpSound);
+            PlaySound(game.jumpSound);
             game.snake.direction = {0,1};
             game.running = true;
         }
 
         if(IsKeyPressed(KEY_LEFT) && game.snake.direction.x != 1)
         {
-            //PlaySound(game.jumpSound);;
+            PlaySound(game.jumpSound);;
             game.snake.direction = {-1,0};
             game.running = true;
         }
 
         if(IsKeyPressed(KEY_RIGHT) && game.snake.direction.x != -1)
         {
-            //PlaySound(game.jumpSound);
+            PlaySound(game.jumpSound);
             game.snake.direction = {1,0};
             game.running = true;
         }
@@ -341,7 +341,7 @@ int main () {
         DrawText(TextFormat("Cowboy Snake       Level : %i",game.level), offset-5, 20, 40, darkGreen);
 
 
-        DrawText(TextFormat("Score : %i",game.score), offset-5, offset+cellSize*cellCount+10, 40, darkGreen);
+        DrawText(TextFormat("Score : %i     Speed : %i",game.score, game.level*10), offset-5, offset+cellSize*cellCount+10, 40, darkGreen);
 
         game.Draw();
 
