@@ -18,11 +18,11 @@ Cài đặt và chạy
 
 Phát triển bởi
 
-Project management team:
+Project management teams:
 
 - DINH VAN QUANG 23730039 
 - DINH QUOC TIEN 23730051
 - NGUYEN NGOC LAN 23730026
 - PHAM TUAN THANH 23730048
 
-Link game :
+Link game : https://infinite-it-initiators.itch.io/snakegame
